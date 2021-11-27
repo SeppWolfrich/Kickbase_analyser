@@ -129,11 +129,13 @@ df = Ligainsider_final
 
 
 # Visualise
+st.set_page_config(layout="wide") # page expands to full width
 st.title("Kickbase Analyser v1.0 (WIP)")
 
 # General analysis
 #st.header('Generelle Analyse aller Spieler der Bundesliga unabhängig vom Verein')
 st.subheader('Durchschnittliche Punkte (gesamte Bundesliga)')
+st.caption('Durchschnittliche Gesamtpunkte aller Spieler der Bundesliga mit mehr als 0 Einsätzen.')
 
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Torhüter Punkte", df.loc[(df['Position'] == 'Torhüter') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
@@ -141,14 +143,14 @@ col2.metric("Verteidiger Punkte", df.loc[(df['Position'] == 'Abwehrspieler') & (
 col3.metric("Mittelfeld Punkte", df.loc[(df['Position'] == 'Mittelfeldspieler') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
 col4.metric("Stürmer Punkte", df.loc[(df['Position'] == 'Stürmer') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
 
-#st.caption('Überraschenderweise schneiden Stürmer aktuell am schlechtesten ab.')
+
 
 
 # Per Team Deep Dive
 st.subheader('Team Analyse')
 
-col = st.selectbox("Select Team", (df['team'].unique()))
-df1 = df[df['team']==col]
+selected_team = st.selectbox("Select Team", (df['team'].unique()))
+df1 = df[df['team']==selected_team]
 
 
 # Show table of team if clicked
@@ -175,7 +177,7 @@ col3.metric("Mittelfeld Punkte", df1.loc[(df1['Position'] == 'Mittelfeldspieler'
 col4.metric("Stürmer Punkte", df1.loc[(df1['Position'] == 'Stürmer') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
 
 
-# Visuals
+# Per Team Visuals
 st.altair_chart(alt.Chart(df1).mark_bar().encode(
     x=alt.X('Spieler', sort='-y'),
     y='Gesamtpunkte', color = 'Position',
@@ -193,3 +195,36 @@ st.altair_chart(alt.Chart(df1).mark_bar().encode(
     y='Marktwert', color = 'Position',
     tooltip=["Spieler","Gesamtpunkte",'Marktwert','PreisProPunkt',"Position"]
 ).interactive(),use_container_width=True)
+
+
+# Per Player Visuals
+st.subheader('Spieler Analyse')
+st.caption('Ausgewählter Spieler wird mit allen anderen Spielern der gleichen Position verglichen. Ausgewählter Spieler ist rot markeiert. Spieler unterhalb der orangenen Linie erzielen durschnittlich überproportional viele Punkte für ihren Marktwert.')
+
+selected_player = st.selectbox("Select Player", (df['Spieler'].unique()))
+
+df2 = df[df['Spieler']==selected_player] #select player based on selection in col1
+
+df_base = df.loc[df['Position'] == df2.iloc[0][1]] #filter dataset based on position
+
+
+chart = alt.Chart(df_base).mark_circle(size=60).encode(
+    x='Gesamtpunkte',
+    y='Marktwert',
+    #color='orange',
+    #size = 'Punkteschnitt',
+    tooltip=['Gesamtpunkte', 'Marktwert', 'Position', 'Spieler','Punkteschnitt', 'team']
+)#.interactive()
+
+chart2 = alt.Chart(df2).mark_circle(size=60).encode(
+    x='Gesamtpunkte',
+    y='Marktwert',
+    color=alt.value('red'),
+    #color='Position',
+    #size = 'Punkteschnitt',
+    tooltip=['Gesamtpunkte', 'Marktwert', 'Position', 'Spieler','Punkteschnitt', 'team']
+)#.interactive()
+
+st.altair_chart((chart + chart2 + chart.transform_regression('Gesamtpunkte', 'Marktwert').mark_line(color="orange")), use_container_width = True)
+
+#+ chart.transform_regression('Gesamtpunkte', 'Marktwert', method="poly").mark_line()
