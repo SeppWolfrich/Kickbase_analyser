@@ -165,6 +165,7 @@ col2.metric("Verteidiger Punkte", df1.loc[(df1['Position'] == 'Abwehrspieler') &
 col3.metric("Mittelfeld Punkte", df1.loc[(df1['Position'] == 'Mittelfeldspieler') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
 col4.metric("Stürmer Punkte", df1.loc[(df1['Position'] == 'Stürmer') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
 
+st.caption('Durchschnittliche Gesamtpunkte aller Spieler des ausgewählten Teams mit mehr als 0 Einsätzen.')
 
 # Per Team Visuals
 st.altair_chart(alt.Chart(df1).mark_bar().encode(
