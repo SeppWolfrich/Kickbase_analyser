@@ -1,22 +1,22 @@
-## Standard Libraries-----------------------------------------------
+# Standard Libraries-----------------------------------------------
 import pandas as pd
 import numpy as np
 import streamlit as st
 import altair as alt
 import matplotlib.pyplot as plt
 
-## Bundesliga Libraries---------------------------------------------
+# Bundesliga Libraries---------------------------------------------
 from soccer_data_api import SoccerDataAPI # Bundesliga standings
 import requests # Scrape Bundesliga fixtures
 import lxml.html as lh # Scrape Bundesliga fixtures
 
 
-## SCRAPE DATA
+# Bundesliga Table ------------------------------------------------
 # Get bundesliga standing from API
 bundesliga_standing = pd.DataFrame(SoccerDataAPI().bundesliga()).iloc[: , :-1]  #current bundesliga table
 
 
-#Scaping Ligainsider page
+# Player data ------------------------------------------------
 ligainsider = 'https://www.ligainsider.de/stats/kickbase/marktwerte/gesamt/'
 page_player_information = requests.get(ligainsider) #Create a handle, page, to handle the contents of the website
 
@@ -88,12 +88,11 @@ Ligainsider.loc[Ligainsider.Verein == '1. FC Union Berlin', 'Verein'] = 'Union B
 Ligainsider.loc[Ligainsider.Verein == 'RB Leipzig', 'Verein'] = 'RB Leipzig'#
 Ligainsider.loc[Ligainsider.Verein == 'Borussia Mönchengladbach', 'Verein'] = "M'Gladbach" #
 
-#Ligainsider_final = Ligainsider
 Ligainsider_final = pd.merge(Ligainsider, bundesliga_standing, left_on='Verein',right_on='team') 
 Ligainsider_final = Ligainsider_final.drop('Verein',1)
 
 
-# Cleaning and converting
+# Cleaning and converting ------------------------------------------------
 Ligainsider_final['Spieler'] = [x.replace('\n', '') for x in Ligainsider_final['Spieler']] #removes /n 
 Ligainsider_final['Spieler'] = Ligainsider_final['Spieler'].astype(str)
 
@@ -107,7 +106,7 @@ Ligainsider_final['Punkteschnitt'] = Ligainsider_final['Gesamtpunkte']/Ligainsid
 Ligainsider_final['Punkteschnitt'] = Ligainsider_final['Punkteschnitt'].fillna(0)
 Ligainsider_final['Punkteschnitt'] = Ligainsider_final['Punkteschnitt'].round(2)
 
-Ligainsider_final['Marktwert'] = [x.replace('.', '') for x in Ligainsider_final['Marktwert']] #remove commas or dots
+Ligainsider_final['Marktwert'] = [x.replace('.', '') for x in Ligainsider_final['Marktwert']] #remove dots
 Ligainsider_final['Marktwert'] = Ligainsider_final['Marktwert'].str.replace('€', '') #remove € sign
 Ligainsider_final['Marktwert'] = Ligainsider_final['Marktwert'].astype(int)
 
@@ -117,12 +116,8 @@ Ligainsider_final.loc[Ligainsider_final.PreisProPunkt == np.inf, 'PreisProPunkt'
 #Ligainsider_final['Spieler']
 df = Ligainsider_final
 
-# Importing Data
-#df = pd.read_csv('/Users/stephanschulz/Documents/30_Projekte/DataScience/LearningPython/MiniProjects/Kickbase/ligainsider.csv')
-#df = df.set_index('Spieler') #set Column to be displayed on chart as index
 
-
-# Visualise
+# Visualise ------------------------------------------------
 st.set_page_config(layout="wide") # page expands to full width
 st.title("Kickbase Analyser v1.0 (WIP)")
 
