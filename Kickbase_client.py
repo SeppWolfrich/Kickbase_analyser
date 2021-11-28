@@ -1,9 +1,3 @@
-#https://www.youtube.com/watch?v=W--_EOzdTHk tutotial
-# activate venv: source ./venv/bin/activate
-# python3 -m pip install "SomeProject" installing packages
-# streamlit run /Users/stephanschulz/Documents/30_Projekte/DataScience/LearningPython/MiniProjects/Kickbase/Kickbase_client.py outside of python3
-
-
 ## Standard Libraries-----------------------------------------------
 import pandas as pd
 import numpy as np
