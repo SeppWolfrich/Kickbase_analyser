@@ -146,14 +146,6 @@ df1 = df[df['team']==selected_team]
 if st.checkbox("Show Rawdata"):
     st.write(df1[['Spieler','Marktwert','Gesamtpunkte','Punkteschnitt', 'PreisProPunkt', 'Einsätze']].sort_values('Gesamtpunkte', ascending = False))
 
-# Download Dataset
-st.download_button(
-   "Click to Download",
-   df,
-   "kickbase.csv",
-   "text/csv",
-   key='download-csv'
-)
 
 col1, col2, col3 = st.columns(3)
 col1.metric('Tabellenplatz', df1['pos'].iloc[0])
