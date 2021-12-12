@@ -203,7 +203,7 @@ chart = alt.Chart(df_base).mark_circle(size=60).encode(
     y='Marktwert',
     #color='orange',
     #size = 'Punkteschnitt',
-    tooltip=['Gesamtpunkte', 'Marktwert', 'Position', 'Spieler','Punkteschnitt', 'team']
+    tooltip=['Spieler', 'Gesamtpunkte', 'Marktwert', 'Position','Punkteschnitt', 'team']
 )#.interactive()
 
 chart2 = alt.Chart(df2).mark_circle(size=60).encode(
@@ -212,9 +212,29 @@ chart2 = alt.Chart(df2).mark_circle(size=60).encode(
     color=alt.value('red'),
     #color='Position',
     #size = 'Punkteschnitt',
-    tooltip=['Gesamtpunkte', 'Marktwert', 'Position', 'Spieler','Punkteschnitt', 'team']
+    tooltip=['Spieler', 'Gesamtpunkte', 'Marktwert', 'Position','Punkteschnitt', 'team']
 )#.interactive()
 
 st.altair_chart((chart + chart2 + chart.transform_regression('Gesamtpunkte', 'Marktwert').mark_line(color="orange")), use_container_width = True)
 
+
+# Plotting Punkteschnitt v Marktwert -----------
+chart3 = alt.Chart(df_base).mark_circle(size=60).encode(
+    x='Punkteschnitt',
+    y='Marktwert',
+    #color='orange',
+    #size = 'Punkteschnitt',
+    tooltip=['Spieler','Gesamtpunkte', 'Marktwert', 'Position','Punkteschnitt', 'team']
+)#.interactive()
+
+chart4 = alt.Chart(df2).mark_circle(size=60).encode(
+    x='Punkteschnitt',
+    y='Marktwert',
+    color=alt.value('red'),
+    #color='Position',
+    #size = 'Punkteschnitt',
+    tooltip=['Spieler','Punkteschnitt', 'Marktwert', 'Position','Gesamtpunkte', 'team']
+)#.interactive()
+
+st.altair_chart((chart3 + chart4 + chart3.transform_regression('Punkteschnitt', 'Marktwert').mark_line(color="orange")), use_container_width = True)
 #+ chart.transform_regression('Gesamtpunkte', 'Marktwert', method="poly").mark_line()
