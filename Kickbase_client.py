@@ -119,7 +119,7 @@ df = Ligainsider_final
 
 # Visualise ------------------------------------------------
 st.set_page_config(layout="wide") # page expands to full width
-st.title("Kickbase Analyser v1.0 (WIP)")
+st.title("Kickbase Analyser v1.1 (WIP)")
 
 # General analysis
 #st.header('Generelle Analyse aller Spieler der Bundesliga unabhängig vom Verein')
@@ -146,6 +146,14 @@ df1 = df[df['team']==selected_team]
 if st.checkbox("Show Rawdata"):
     st.write(df1[['Spieler','Marktwert','Gesamtpunkte','Punkteschnitt', 'PreisProPunkt', 'Einsätze']].sort_values('Gesamtpunkte', ascending = False))
 
+# Download Dataset
+st.download_button(
+   "Click to Download",
+   df,
+   "kickbase.csv",
+   "text/csv",
+   key='download-csv'
+)
 
 col1, col2, col3 = st.columns(3)
 col1.metric('Tabellenplatz', df1['pos'].iloc[0])
