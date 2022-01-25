@@ -118,9 +118,10 @@ Ligainsider_final.loc[Ligainsider_final.PreisProPunkt == np.inf, 'PreisProPunkt'
 df = Ligainsider_final
 
 
-# Visualise
+# VISUALISATION
 st.set_page_config(layout="wide") # page expands to full width
-st.title("Kickbase Analyser v1.2 (WIP)")
+st.title("Kickbase Analyser v1.2")
+st.caption('By [Sepp Wolfrich](https://twitter.com/SeppWolfrich). Feedback gerne direkt an mich via Twitter!')
 
 # General analysis
 #st.header('Generelle Analyse aller Spieler der Bundesliga unabhängig vom Verein')
