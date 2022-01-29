@@ -190,7 +190,7 @@ st.altair_chart(alt.Chart(df1).mark_bar().encode(
 
 # Per Player Visuals
 st.subheader('Spieler Analyse')
-st.caption('Ausgewählter Spieler wird mit allen anderen Spielern der gleichen Position verglichen. Ausgewählter Spieler ist rot markeiert. Spieler unterhalb der orangenen Linie erzielen durschnittlich überproportional viele Punkte für ihren Marktwert.')
+st.caption('Ausgewählte Spieler werden mit allen anderen Spielern der gleichen Position verglichen. Ausgewählte Spieler sind farblich markeiert. Spieler unterhalb der Linie erzielen durschnittlich überproportional viele Punkte für ihren Marktwert.')
 
 #selected_player = st.multiselect("Select Player", (df['Spieler'].unique())) #single selection
 #df2 = df[df['Spieler']==[selected_player]] #select player based on selection in col1
