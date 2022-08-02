@@ -131,10 +131,10 @@ st.subheader('Durchschnittliche Punkte (gesamte Bundesliga)')
 st.caption('Durchschnittliche Gesamtpunkte aller Spieler der Bundesliga mit mehr als 0 Einsätzen.')
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Torhüter Punkte", df.loc[(df['Position'] == 'Torhüter') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
-col2.metric("Verteidiger Punkte", df.loc[(df['Position'] == 'Abwehrspieler') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
-col3.metric("Mittelfeld Punkte", df.loc[(df['Position'] == 'Mittelfeldspieler') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
-col4.metric("Stürmer Punkte", df.loc[(df['Position'] == 'Stürmer') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
+col1.metric("Torhüter Punkte", round(df.loc[(df['Position'] == 'Torhüter') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean(),2))
+col2.metric("Verteidiger Punkte", round(df.loc[(df['Position'] == 'Abwehrspieler') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean(),2))
+col3.metric("Mittelfeld Punkte", round(df.loc[(df['Position'] == 'Mittelfeldspieler') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean(),2))
+col4.metric("Stürmer Punkte", round(df.loc[(df['Position'] == 'Stürmer') & (df['Einsätze'] != 0), 'Gesamtpunkte'].mean(),2))
 
 
 
@@ -164,10 +164,11 @@ col3.metric('Gesamtmarktwert', Marktwert_EUR)
 
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Torhüter Punkte", df1.loc[(df1['Position'] == 'Torhüter') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
-col2.metric("Verteidiger Punkte", df1.loc[(df1['Position'] == 'Abwehrspieler') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
-col3.metric("Mittelfeld Punkte", df1.loc[(df1['Position'] == 'Mittelfeldspieler') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
-col4.metric("Stürmer Punkte", df1.loc[(df1['Position'] == 'Stürmer') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean().round(2))
+col1.metric("Torhüter Punkte", round(df1.loc[(df1['Position'] == 'Torhüter') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean(),2))
+col2.metric("Verteidiger Punkte", round(df1.loc[(df1['Position'] == 'Abwehrspieler') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean(),2))
+col3.metric("Mittelfeld Punkte", round(df1.loc[(df1['Position'] == 'Mittelfeldspieler') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean(),2))
+col4.metric("Stürmer Punkte", round(df1.loc[(df1['Position'] == 'Stürmer') & (df1['Einsätze'] != 0), 'Gesamtpunkte'].mean(),2))
+
 
 
 # Per Team Visuals
