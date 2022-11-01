@@ -17,7 +17,7 @@ bundesliga_standing = pd.DataFrame(SoccerDataAPI().bundesliga()).iloc[: , :-1]  
 
 
 #Scaping Ligainsider page
-ligainsider = 'https://www.ligainsider.de/stats/kickbase/rangliste/feldspieler/durchschnitt/'
+ligainsider = 'https://www.ligainsider.de/stats/kickbase/rangliste/feldspieler/durchschnitt/' #I had to change the link which removed Keeper Scores and messed up the DF structure (check 69)
 page_player_information = requests.get(ligainsider) #Create a handle, page, to handle the contents of the website
 
 doc = lh.fromstring(page_player_information.content) #Store the contents of the website under doc
@@ -66,7 +66,7 @@ for j in range(1,len(tr_elements)):
 Dict={title:column for (title,column) in col}
 Ligainsider=pd.DataFrame(Dict)
 
-Ligainsider.rename(columns = {' Punkte ':'Gesamtpunkte', ' Ø–Punkte ':'Punkteschnitt', ' Marktwert ': 'Marktwert',' Einsätze ': 'Einsätze'}, inplace = True)
+Ligainsider.rename(columns = {' Punkte ':'Gesamtpunkte', ' Ø–Punkte ':'Punkteschnitt', ' Marktwert ': 'Marktwert',' Einsätze ': 'Einsätze'}, inplace = True) #Had to rename columns. This is still casuing issues in the local model
 
 Ligainsider = Ligainsider[['Spieler','Verein','Position','Gesamtpunkte','Einsätze','Punkteschnitt','Marktwert']]
 
