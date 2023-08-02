@@ -89,6 +89,9 @@ Ligainsider.loc[Ligainsider.Verein == '1. FC Köln', 'Verein'] = 'Köln'#
 Ligainsider.loc[Ligainsider.Verein == '1. FC Union Berlin', 'Verein'] = 'Union Berlin'#
 Ligainsider.loc[Ligainsider.Verein == 'RB Leipzig', 'Verein'] = 'RB Leipzig'#
 Ligainsider.loc[Ligainsider.Verein == 'Borussia Mönchengladbach', 'Verein'] = "M'Gladbach" #
+Ligainsider.loc[Ligainsider.Verein == 'Darmstadt 98', 'Verein'] = "Darmstadt 98" #
+Ligainsider.loc[Ligainsider.Verein == '1. FC Heidenheim', 'Verein'] = "Heidenheim" #
+Ligainsider.loc[Ligainsider.Verein == 'SV Werder Bremen', 'Verein'] = "Werder Bremen" #
 
 #Ligainsider_final = Ligainsider
 Ligainsider_final = pd.merge(Ligainsider, bundesliga_standing, left_on='Verein',right_on='team') 
