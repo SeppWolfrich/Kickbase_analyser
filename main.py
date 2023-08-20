@@ -126,7 +126,7 @@ df = Ligainsider_final
 # VISUALISATION
 st.set_page_config(layout="wide") # page expands to full width
 st.title("Kickbase Analyser v1.2")
-st.markdown('<p> Created by Sepp Wolfrich. Feedback gerne direkt an mich via <a href="https://twitter.com/SeppWolfrich">Twitter</a> oder <a href="mailto:joseppwolfrich@gmail.com?subject=Kickbase Analyser Feedback!">Mail!</a> </p>', unsafe_allow_html=True)
+st.markdown('<p> Created by Sepp Wolfrich. Feedback gerne direkt an mich via <a href="https://x.com/SeppWolfrich">Twitter</a> oder <a href="mailto:joseppwolfrich@gmail.com?subject=Kickbase Analyser Feedback!">Mail!</a> </p>', unsafe_allow_html=True)
 
 
 
