@@ -95,7 +95,7 @@ Ligainsider.loc[Ligainsider.Verein == 'SV Werder Bremen', 'Verein'] = "Werder Br
 
 #Ligainsider_final = Ligainsider
 Ligainsider_final = pd.merge(Ligainsider, bundesliga_standing, left_on='Verein',right_on='team') 
-Ligainsider_final = Ligainsider_final.drop('Verein',1)
+Ligainsider_final.drop('Verein', axis=1, inplace=True)
 
 
 # Cleaning and converting
